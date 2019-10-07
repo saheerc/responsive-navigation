@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Navigation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <span class="brand-icon">◈</span> NexUI
+      </div>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link">Products <span class="arrow">▾</span></a>
+          <ul class="dropdown">
+            <li><a href="#">Component Library</a></li>
+            <li><a href="#">Templates</a></li>
+            <li><a href="#">Icons</a></li>
+            <li><a href="#">Themes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link">Developers <span class="arrow">▾</span></a>
+          <ul class="dropdown">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#" class="btn-ghost-nav">Log In</a>
+        <a href="#" class="btn-primary-nav">Get Started</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Responsive Navigation<br />Done Right</h1>
+      <p>Resize the window to see the mobile hamburger menu in action. Includes dropdown menus, smooth animations, and accessible markup.</p>
+      <a href="#" class="btn-hero">Explore Components</a>
+    </section>
+
+    <section class="features">
+      <div class="card">
+        <h3>Mobile First</h3>
+        <p>Built with a mobile-first approach. Works beautifully on any screen size.</p>
+      </div>
+      <div class="card">
+        <h3>Accessible</h3>
+        <p>Keyboard navigable, ARIA-compliant, and screen reader friendly.</p>
+      </div>
+      <div class="card">
+        <h3>No Dependencies</h3>
+        <p>Pure HTML, CSS, and vanilla JavaScript. No frameworks required.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 NexUI. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      const hamburger = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    }
+
+    document.querySelectorAll('.has-dropdown > .nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (window.innerWidth < 768) {
+          e.preventDefault();
+          this.parentElement.classList.toggle('dropdown-open');
+        }
+      });
+    });
+
+    document.querySelectorAll('.nav-link:not(.has-dropdown .nav-link)').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        if (window.innerWidth < 768) toggleMenu();
+      });
+    });
+  </script>
+
+</body>
+</html>
